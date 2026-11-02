@@ -15,6 +15,9 @@
 <meta name="apple-mobile-web-app-title" content="Whaaat!?" />
 <link rel="manifest" href="/images/favicon/site.webmanifest" />
 <style>
+  html {
+    scroll-behavior: smooth;
+  }
   html, body {
     margin: 0;
     padding: 0;
@@ -150,6 +153,17 @@
   }
   .cta-row .cta-button {
     margin: 0;
+  }
+  /* section jump links: smaller, cream, so Tickets stays the loudest button */
+  .cta-row--nav {
+    gap: 0.75rem;
+  }
+  .cta-row--nav .cta-button {
+    background-color: #fff5c3;
+    font-size: 1.35rem;
+  }
+  .cta-row--nav .cta-button:hover {
+    background-color: #f2e6a8;
   }
   .video-placeholder {
     width: 70%;
@@ -581,6 +595,21 @@
     text-transform: uppercase;
     letter-spacing: -0.05em;
   }
+  .arcade-games {
+    margin: 0.75rem 0 0;
+    font-family: "nitti-typewriter-normal", monospace;
+    letter-spacing: -0.1em;
+    font-size: 16px;
+    line-height: 1.3;
+    font-style: italic;
+  }
+  .arcade-games a {
+    color: inherit;
+    text-underline-offset: 0.15em;
+  }
+  .arcade-games a:hover {
+    text-decoration-thickness: 2px;
+  }
   .schedule-item {
     display: grid;
     grid-template-columns: 9rem 1fr;
@@ -771,8 +800,14 @@
     50% { scale: 1.06; }
   }
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
     .braaain-logo {
       animation: none;
+    }
+    .activity-more a {
+      transition: none;
     }
   }
   .activity-more {
@@ -783,6 +818,22 @@
     font-weight: 700;
     font-size: 24px;
     text-align: center;
+  }
+  /* highlighter swipe across each line on hover */
+  .activity-more a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+    background-image: linear-gradient(rgba(96, 65, 24, 0.18), rgba(96, 65, 24, 0.18));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 100%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background-size 0.35s ease;
+  }
+  .activity-more a:hover,
+  .activity-more a:focus-visible {
+    background-size: 100% 100%;
   }
   @media (max-width: 900px) {
     .header {
@@ -810,6 +861,9 @@
     .cta-button {
       font-size: 1.3rem;
       padding: 0.15em 1em;
+    }
+    .cta-row--nav .cta-button {
+      font-size: 1.1rem;
     }
     .video-placeholder {
       width: 92%;
@@ -1044,9 +1098,14 @@
       <p class="date-line">SATURDAY, NOVEMBER 7th, 2026</p>
       <p class="date-line">ATLAS Institute, Boulder, CO</p>
       <div class="cta-row">
-        <a href="http://eepurl.com/hcOlw9" target="_blank" rel="noopener" class="cta-button">Sign Up for Updates</a>
         <a href="https://www.eventbrite.com/e/2026-whaaat-festival-tickets-1995037479807?aff=oddtdtcreator" target="_blank" rel="noopener" class="cta-button">Tickets</a>
       </div>
+      <nav class="cta-row cta-row--nav" aria-label="Festival sections">
+        <a href="#keynote" class="cta-button">Keynote</a>
+        <a href="#schedule" class="cta-button">Schedule</a>
+        <a href="#gameshow" class="cta-button">Gameshow</a>
+        <a href="#arcades" class="cta-button">Games</a>
+      </nav>
       <div class="logo-divider">
         <hr>
         <img class="header-icon" src="images/smallinterro.svg" alt="">
@@ -1080,13 +1139,13 @@
         <li>Indulge yourself in our favorite genre of music, drums</li>
         <li>Help us deal with the growing sinkhole issue</li>
       </ul>
-      <p class="activity-more">...and so much more!</p>
+      <p class="activity-more"><a href="#arcades">See what games are featured<br>at this year's festival</a></p>
       <div class="logo-divider">
         <hr>
         <img class="header-icon" src="images/smallinterro.svg" alt="">
         <hr>
       </div>
-      <p class="invite-line invite-line--futura">Introducing the Speaker of Keynotes</p>
+      <p class="invite-line invite-line--futura" id="keynote">Introducing the Speaker of Keynotes</p>
       <div class="keynote">
         <div class="keynote-figure">
           <img class="keynote-image" src="images/jamin.svg" alt="Portrait of Jamin Warren">
@@ -1130,7 +1189,7 @@
         <img class="header-icon" src="images/smallinterro.svg" alt="">
         <hr>
       </div>
-      <p class="invite-line invite-line--futura">The day is jam packed with celebrations!</p>
+      <p class="invite-line invite-line--futura" id="schedule">The day is jam packed with celebrations!</p>
       <ol class="schedule">
         <li class="schedule-item">
           <p class="schedule-time">9:00–9:45</p>
@@ -1210,7 +1269,7 @@
         <img class="header-icon" src="images/smallinterro.svg" alt="">
         <hr>
       </div>
-      <section class="braaain" aria-labelledby="braaain-title">
+      <section class="braaain" id="gameshow" aria-labelledby="braaain-title">
         <h2 class="braaain-title" id="braaain-title"><img class="braaain-head" src="images/head.svg" alt=""><img class="braaain-logo" src="images/braaainshow-logo.svg" alt="BRAAAINSHOW!?" width="1513" height="482"></h2>
         <div class="braaain-band braaain-band--red">
           <p class="braaain-tagline">Do you like it? We like it!</p>
@@ -1226,7 +1285,7 @@
         <img class="header-icon" src="images/smallinterro.svg" alt="">
         <hr>
       </div>
-      <p class="invite-line invite-line--futura">The Arcades</p>
+      <p class="invite-line invite-line--futura" id="arcades">The Arcades</p>
       <p class="arcade-subtitle">Our nation's greatest export, open all day from <span class="nowrap">10:00–5:00</span>.</p>
       <div class="arcade-section">
         <div class="arcade-grid">
@@ -1234,26 +1293,31 @@
             <h4 class="arcade-title">Revolutionary Exhibition Hall</h4>
             <p class="arcade-location">ATLAS BBX</p>
             <p class="schedule-desc">Join us in the Revolutionary Exhibition Hall for a rotating selection of the best and weirdest games we could find, projected as large as our revolutionary spirit (and the ceiling of the room) allow.</p>
+            <p class="arcade-games">Featuring <a href="https://store.steampowered.com/app/2524850/Denshattack/" target="_blank" rel="noopener">Denshattack!</a>, <a href="https://store.steampowered.com/app/3646020/Ultimate_Drummer/" target="_blank" rel="noopener">Ultimate Drummer</a>, and <a href="https://store.steampowered.com/app/3370870/Berry_Bury_Berry/" target="_blank" rel="noopener">Berry Bury Berry</a>.</p>
           </div>
           <div class="arcade-card">
             <h4 class="arcade-title">Ministry of Sport</h4>
             <p class="arcade-location">ATLAS SL1</p>
             <p class="schedule-desc">It's said the foundations of every healthy nation are its sports. Or in this case, surrealist videogame versions of "sports". So yeah, the nation is healthy, basically.</p>
+            <p class="arcade-games">Featuring <a href="https://store.steampowered.com/app/2367820/despelote/" target="_blank" rel="noopener">despelote</a>, <a href="https://store.steampowered.com/app/3621330/Pro_Jank_Footy/" target="_blank" rel="noopener">Pro Jank Footy</a>, and <a href="https://store.steampowered.com/app/2824780/TORSO_TENNIS/" target="_blank" rel="noopener">TORSO TENNIS</a>.</p>
           </div>
           <div class="arcade-card">
             <h4 class="arcade-title">Ministry of Important Work</h4>
             <p class="arcade-location">ATLAS&nbsp;104</p>
             <p class="schedule-desc">Even glorious revolutionary micronations have tedious tasks that mid-level bureaucrats have to complete to keep the lights on. Help us keep our lights on? The tasks are pretty fun, actually.</p>
+            <p class="arcade-games">Featuring <a href="https://store.steampowered.com/app/4585340/Horse_Magnifier_The_Full_Horse/" target="_blank" rel="noopener">Horse Magnifier</a>, <a href="https://store.steampowered.com/app/3965430/The_Mailroom/" target="_blank" rel="noopener">The Mailroom</a>, and <a href="https://store.steampowered.com/app/3547270/Worming_from_Home/" target="_blank" rel="noopener">Worming from Home</a>.</p>
           </div>
           <div class="arcade-card">
             <h4 class="arcade-title">TKIYRNB (That Kid In Your Revolutionary Neighborhood's Basement)</h4>
             <p class="arcade-location">ATLAS SL3</p>
             <p class="schedule-desc">How did that kid from the Media Archaeology Lab get all these vintage video game consoles into the country? Call border security! After we play them all day, of course.</p>
+            <p class="arcade-games">Featuring the best old games, courtesy of the <a href="https://www.mediaarchaeologylab.com" target="_blank" rel="noopener">MAL</a>.</p>
           </div>
           <div class="arcade-card">
             <h4 class="arcade-title">State-Sanctioned Gambling Corridor</h4>
             <p class="arcade-location">ATLAS 1B Hallway</p>
             <p class="schedule-desc">Enjoy the thrill of losing it all in a sketchy alleyway, now with government approval! Whaaat!? currency only, please.</p>
+            <p class="arcade-games">Featuring <a href="https://store.steampowered.com/app/3989550/Fallosophy/" target="_blank" rel="noopener">Fallosophy</a> and <a href="https://store.steampowered.com/app/3948120/Scritchy_Scratchy/" target="_blank" rel="noopener">Scritchy Scratchy</a>.</p>
           </div>
         </div>
       </div>
